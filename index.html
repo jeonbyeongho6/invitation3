@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#f3eee9;color:#3f332d;line-height:1.7}
+    .wrap{max-width:430px;margin:0 auto;background:#fffaf6;min-height:100vh;box-shadow:0 0 30px rgba(0,0,0,.06)}
+    section{padding:56px 26px;text-align:center;border-bottom:1px solid #efe4dc}
+    .hero{padding:0 0 46px}
+    .hero-img{position:relative;width:100%;height:560px;background:url("사진1.jpg") center/cover no-repeat;display:flex;align-items:flex-end;justify-content:center;padding:0 24px 54px;color:#fff}
+    .hero-img:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.45))}
+    .hero-text{position:relative;z-index:1;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+    .hero-text .date{font-size:14px;letter-spacing:2px;margin-bottom:10px}.hero-text h1{font-family:Georgia,serif;font-size:42px;font-weight:400;letter-spacing:1px}
+    .names{margin-top:34px;font-size:23px;letter-spacing:2px}.small-text{margin-top:8px;font-size:14px;color:#9a8274}
+    .sub-title{font-family:Georgia,serif;font-size:25px;font-weight:400;color:#8b6f61;margin-bottom:24px}.ko-title{font-size:20px;font-weight:600;color:#4a3a32;margin-bottom:18px}
+    .message{font-size:16px;color:#5f524c;word-break:keep-all}.divider{width:1px;height:44px;background:#dac9bd;margin:30px auto}.parents{margin-top:34px;font-size:15px;color:#6b5c55}
+    .quick{position:sticky;top:0;z-index:20;background:rgba(255,250,246,.94);backdrop-filter:blur(10px);padding:10px 8px;border-bottom:1px solid #eaded6;overflow:auto;white-space:nowrap;text-align:left}
+    .quick a{display:inline-block;margin:0 4px;padding:8px 12px;border-radius:999px;background:#efe4dc;color:#6b5146;text-decoration:none;font-size:13px}
+    .card{background:#fff;border:1px solid #eaded6;border-radius:22px;padding:24px 18px;margin-top:16px;box-shadow:0 8px 22px rgba(139,111,97,.08)}
+    .card strong{display:block;font-size:19px;margin-bottom:8px;color:#3f332d}.card p{font-size:15px;color:#655750}.muted{font-size:14px;color:#8d7a70}.left{text-align:left}
+    .calendar{margin-top:24px;border-collapse:collapse;width:100%;font-size:14px;color:#6b5c55}.calendar th,.calendar td{padding:8px 0;text-align:center}.calendar th{font-weight:500;color:#9b8578}.calendar .sun{color:#c4877a}.calendar .day{background:#b58b7a;color:#fff;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center}
+    .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.btn{display:block;padding:13px 10px;border-radius:999px;background:#8b6f61;color:#fff;text-decoration:none;font-size:14px;border:0;cursor:pointer}.btn.light{background:#e4d3c8;color:#5b453c}.btn.full{grid-column:span 2}.btn.small{padding:10px;font-size:13px}
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}.gallery img{width:100%;height:172px;object-fit:cover;border-radius:18px;display:block}.gallery img:first-child{grid-column:span 2;height:260px}
+    .map{width:100%;height:260px;border:0;border-radius:20px;margin:20px 0 12px;background:#eaded6}.account-box,.transport-box,.notice-box{margin-top:12px;background:#fff;border-radius:18px;border:1px solid #eaded6;padding:18px;text-align:left;font-size:14px;color:#5d514c}.account-box b,.transport-box b,.notice-box b{color:#3f332d}
+    .toggle-content{display:none}.toggle-content.open{display:block}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tag{display:inline-block;margin:4px;padding:5px 10px;border-radius:999px;background:#f0e2d9;color:#7b6257;font-size:12px}
+    .d-day{font-size:34px;font-weight:700;color:#8b6f61;margin:8px 0}.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.countdown div{background:#fff;border:1px solid #eaded6;border-radius:14px;padding:10px 4px}.countdown b{display:block;font-size:20px;color:#4a3a32}.countdown span{font-size:11px;color:#9b8578}
+    .guestbook textarea,.guestbook input,.rsvp input,.rsvp select{width:100%;padding:12px;border:1px solid #eaded6;border-radius:12px;background:#fffaf6;margin-top:8px;font-family:inherit}.guest-list{margin-top:14px;text-align:left}.guest-item{padding:12px;border-bottom:1px solid #eaded6;font-size:14px}.copy{float:right;border:0;background:#e4d3c8;color:#5b453c;border-radius:999px;padding:5px 9px;font-size:12px}
+    .video-box{position:relative;width:100%;padding-top:56.25%;border-radius:20px;overflow:hidden;background:#eaded6;margin-top:16px}.video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    footer{padding:36px 20px 80px;text-align:center;font-size:13px;color:#9b8578}.fixed-share{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:min(390px,calc(100% - 32px));display:grid;grid-template-columns:1fr 1fr;gap:10px;z-index:30}.fixed-share .btn{box-shadow:0 8px 22px rgba(0,0,0,.16)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero" id="intro">
+      <div class="hero-img"><div class="hero-text"><div class="date">2026. 06. 20. SAT. 12:00 PM</div><h1>Wedding Day</h1></div></div>
+      <div class="names">김도윤 · 이서연</div><div class="small-text">저희 결혼합니다</div>
+    </section>
+
+    <nav class="quick">
+      <a href="#intro">인트로</a><a href="#main">메인</a><a href="#calendar">일정</a><a href="#location">지도</a><a href="#gallery">갤러리</a><a href="#contact">연락</a><a href="#account">계좌</a><a href="#rsvp">참석</a>
+    </nav>
+
+    <section id="main"><h2 class="sub-title">Invitation</h2><p class="message">서로의 가장 좋은 친구가 되어<br>같은 방향을 바라보며 걸어가려 합니다.<br><br>소중한 분들을 모시고<br>저희 두 사람의 시작을 함께 나누고 싶습니다.<br>따뜻한 마음으로 축복해 주시면 감사하겠습니다.</p><div class="divider"></div><div class="parents">김민수 · 박지영의 장남 <b>도윤</b><br>이현우 · 최은아의 장녀 <b>서연</b></div></section>
+
+    <section id="calendar"><h2 class="sub-title">Wedding Date</h2><div class="card"><strong>2026년 6월 20일 토요일</strong><p>오후 12시 00분</p></div><div class="d-day" id="dday">D-day</div><div class="countdown"><div><b id="days">0</b><span>일</span></div><div><b id="hours">0</b><span>시간</span></div><div><b id="minutes">0</b><span>분</span></div><div><b id="seconds">0</b><span>초</span></div></div><table class="calendar"><thead><tr><th class="sun">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr></thead><tbody><tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr><tr><td class="sun">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr><tr><td class="sun">14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td><span class="day">20</span></td></tr><tr><td class="sun">21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr><tr><td class="sun">28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr></tbody></table><div class="btn-row"><a class="btn full" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=김도윤·이서연 결혼식&dates=20260620T030000Z/20260620T050000Z&details=결혼식에 초대합니다." target="_blank">구글 캘린더에 저장</a></div></section>
+
+    <section id="location"><h2 class="sub-title">Location</h2><div class="card"><strong>서울신라호텔</strong><p>서울특별시 중구 동호로 249</p></div><iframe id="googleMap" class="map" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=37.5569,127.0056&z=16&output=embed"></iframe><div class="btn-row"><a id="googleMapBtn" class="btn" href="https://www.google.com/maps/search/?api=1&query=37.5569,127.0056" target="_blank">구글지도 열기</a><a id="naverMapBtn" class="btn light" href="https://map.naver.com" target="_blank">네이버지도</a></div><div class="transport-box"><b>교통 안내</b><br>지하철 2호선 ○○역 3번 출구 도보 5분<br>주차는 예식장 지하 주차장을 이용해 주세요.</div><div class="transport-box"><b>버스·주차 안내</b><br>간선 000번, 지선 0000번 이용<br>예식 2시간 무료 주차 가능</div></section>
+
+    <section id="gallery"><h2 class="sub-title">Gallery</h2><div class="gallery"><img src="사진1.jpg" alt="웨딩 사진 1"><img src="사진2.png" alt="웨딩 사진 2"><img src="사진3.jpg" alt="웨딩 사진 3"><img src="사진4.png" alt="웨딩 사진 4"></div></section>
+
+    <section id="video"><h2 class="sub-title">Video</h2><p class="message">영상이 있다면 아래 유튜브 주소만 바꿔 사용하세요.</p><div class="video-box"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="wedding video" allowfullscreen></iframe></div></section>
+
+    <section id="interview"><h2 class="sub-title">Interview</h2><div class="card left"><b>Q. 서로의 첫인상은?</b><br>신랑: 밝고 따뜻한 사람이라고 느꼈습니다.<br><br><b>Q. 앞으로 어떤 가정을 만들고 싶나요?</b><br>신부: 서로의 하루를 가장 먼저 응원하는 가정을 만들고 싶습니다.</div></section>
+
+    <section id="notice"><h2 class="sub-title">Notice</h2><div class="notice-box"><b>안내사항</b><br>식사는 예식 후 같은 층 연회장에서 진행됩니다.<br>화환은 정중히 사양합니다.</div><div class="notice-box"><b>방명록 안내</b><br>축하 메시지는 아래 방명록에 남겨 주세요.</div></section>
+
+    <section id="contact"><h2 class="sub-title">Contact</h2><div class="btn-row"><a class="btn" href="tel:01012345678">신랑 연락</a><a class="btn light" href="sms:01012345678">신랑 문자</a><a class="btn" href="tel:01098765432">신부 연락</a><a class="btn light" href="sms:01098765432">신부 문자</a></div></section>
+
+    <section id="account"><h2 class="sub-title">마음 전하실 곳</h2><button class="btn full" onclick="toggleBox('accounts')">계좌번호 보기</button><div id="accounts" class="toggle-content"><div class="account-box"><b>신랑측</b><button class="copy" onclick="copyText('국민은행 000000-00-000000 김도윤')">복사</button><br>국민은행 000000-00-000000 김도윤</div><div class="account-box"><b>신부측</b><button class="copy" onclick="copyText('신한은행 000-000-000000 이서연')">복사</button><br>신한은행 000-000-000000 이서연</div></div></section>
+
+    <section id="rsvp"><h2 class="sub-title">참석 여부</h2><div class="rsvp left"><label>성함<input id="rsvpName" placeholder="성함을 입력해 주세요"></label><label>참석 여부<select id="rsvpAttend"><option>참석합니다</option><option>참석이 어렵습니다</option></select></label><label>식사 여부<select id="rsvpMeal"><option>식사합니다</option><option>식사하지 않습니다</option></select></label><button class="btn full" style="margin-top:12px" onclick="saveRsvp()">참석 여부 남기기</button><p class="muted" id="rsvpResult"></p></div></section>
+
+    <section id="guestbook"><h2 class="sub-title">Guest Book</h2><div class="guestbook"><input id="guestName" placeholder="이름"><textarea id="guestMsg" rows="4" placeholder="축하 메시지를 남겨 주세요"></textarea><button class="btn full" style="margin-top:12px" onclick="addGuest()">글 남기기</button><div class="guest-list" id="guestList"></div></div></section>
+
+    <section id="share"><h2 class="sub-title">Share</h2><p class="message">소중한 분들께 청첩장을 공유해 주세요.</p><div class="btn-row"><button class="btn" onclick="sharePage()">공유하기</button><button class="btn light" onclick="copyText(location.href)">주소 복사</button></div></section>
+
+    <footer>소중한 걸음으로 함께해 주셔서 감사합니다.</footer>
+  </div>
+
+  <div class="fixed-share"><a class="btn" href="#location">오시는 길</a><button class="btn light" onclick="sharePage()">공유하기</button></div>
+
+  <script>
+    const weddingDate = new Date('2026-06-20T12:00:00+09:00');
+    const LAT = 37.5569;
+    const LNG = 127.0056;
+
+    function updateMap(){
+      document.getElementById('googleMap').src = `https://maps.google.com/maps?q=${LAT},${LNG}&z=16&output=embed`;
+      document.getElementById('googleMapBtn').href = `https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`;
+    }
+    updateMap();
+
+    function updateDday(){
+      const now = new Date();
+      const diff = weddingDate - now;
+      const abs = Math.abs(diff);
+      const d = Math.floor(abs / (1000*60*60*24));
+      const h = Math.floor(abs / (1000*60*60)) % 24;
+      const m = Math.floor(abs / (1000*60)) % 60;
+      const s = Math.floor(abs / 1000) % 60;
+      document.getElementById('dday').textContent = diff >= 0 ? `D-${d}` : `D+${d}`;
+      document.getElementById('days').textContent = d;
+      document.getElementById('hours').textContent = h;
+      document.getElementById('minutes').textContent = m;
+      document.getElementById('seconds').textContent = s;
+    }
+    updateDday(); setInterval(updateDday, 1000);
+
+    function toggleBox(id){document.getElementById(id).classList.toggle('open')}
+    function copyText(text){navigator.clipboard.writeText(text).then(()=>alert('복사되었습니다.'))}
+    function sharePage(){if(navigator.share){navigator.share({title:document.title,text:'모바일 청첩장입니다.',url:location.href})}else{copyText(location.href)}}
+    function addGuest(){
+      const name=document.getElementById('guestName').value.trim();
+      const msg=document.getElementById('guestMsg').value.trim();
+      if(!name||!msg){alert('이름과 메시지를 입력해 주세요.');return}
+      const list=document.getElementById('guestList');
+      const item=document.createElement('div');item.className='guest-item';item.innerHTML=`<b>${name}</b><br>${msg}`;list.prepend(item);
+      document.getElementById('guestName').value='';document.getElementById('guestMsg').value='';
+    }
+    function saveRsvp(){
+      const name=document.getElementById('rsvpName').value.trim();
+      if(!name){alert('성함을 입력해 주세요.');return}
+      const attend=document.getElementById('rsvpAttend').value;
+      const meal=document.getElementById('rsvpMeal').value;
+      document.getElementById('rsvpResult').textContent=`${name}님, '${attend}', '${meal}'로 기록되었습니다. 실제 저장은 구글폼 링크 또는 서버 연동이 필요합니다.`;
+    }
+  </script>
+</body>
+</html>
